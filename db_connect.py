@@ -2,44 +2,38 @@ import psycopg2
 import pandas as pd
 import os
 import dotenv
+import asyncio
+import asyncpg
 
 dotenv.load_dotenv()
 
 assets = {'BTCUSDT':4, 'ARKMUSDT':15}
 
-def get_data(asset):
+async def get_data(asset):
+    
+    conn = await asyncpg.connect(
+        database=os.getenv('database'),
+        user=os.getenv('user'),
+        password=os.getenv('password'),
+        host=os.getenv('host'),
+        port=os.getenv('port')
+    )
+
     try:
-        conn = psycopg2.connect(
-            database=os.getenv('database'),
-            user=os.getenv('user'),
-            password=os.getenv('password'),
-            host=os.getenv('host'),
-            port=os.getenv('port')
-        )
-        cursor = conn.cursor()
-        cursor.execute(
-            # "SELECT id, session_date, start_of_candle, price_open, price_high, price_low, price_close, volume, ma7, ma14, ma28, symbol_id FROM public.get_data_five_minutes;"
-            f"SELECT id, session_date, start_of_candle, price_open, price_high, price_low, price_close, volume, symbol_id FROM public.get_data_five_minutes\
-                WHERE symbol_id={assets[asset]} AND session_date = CURRENT_DATE;"
-            )
-        
-        # Fetch all rows
-        rows = cursor.fetchall()
-        data =  pd.DataFrame(rows)
-        # print(data)
-        # for row in rows:
-            # print(row)
+        query = f"SELECT id, session_date, start_of_candle, price_open, price_high, price_low, price_close, volume, symbol_id FROM public.get_data_five_minutes\
+                WHERE symbol_id={assets[asset]} AND session_date = CURRENT_DATE - 1;"
+
+        rows = await conn.fetch(query)
+        data = pd.DataFrame(rows)
+        print(data)
+
+        return data
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
-        if cursor:
-            cursor.close()
         if conn:
-            conn.close()
-
-    return data
-
+            await conn.close()
 
 
 class ConsLevels():
@@ -62,7 +56,7 @@ class ConsLevels():
             cursor.execute(
                 # "SELECT id, session_date, start_of_candle, price_open, price_high, price_low, price_close, volume, ma7, ma14, ma28, symbol_id FROM public.get_data_five_minutes;"
                 f"SELECT id, symbol, session, cons_ysd_body_levels, cons_ysd_body_levels_neg, cons_ysd_body_levels_tr100, cons_ysd_body_levels_tr100_neg, series_neg, series_pos\
-                FROM public.ysd_body_levels WHERE symbol='{asset}' AND session = CURRENT_DATE;"
+                FROM public.ysd_body_levels WHERE symbol='{asset}' AND session = CURRENT_DATE - 1;"
                 )
             
             # Fetch all rows
@@ -88,6 +82,8 @@ btc = ConsLevels()
 btc.get_cons_levels('BTCUSDT')
 arkm = ConsLevels()
 arkm.get_cons_levels('ARKMUSDT')
+ach = ConsLevels()
+ach.get_cons_levels('ACHUSDT')
 
 if __name__ == '__main__':
 #    get_cons_levels('BTCUSDT')
