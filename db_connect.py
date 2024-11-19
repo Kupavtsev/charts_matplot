@@ -25,9 +25,20 @@ async def get_data(asset):
 
         rows = await conn.fetch(query)
         data = pd.DataFrame(rows)
-        print(data)
+        
 
-        return data
+        # Step 1: Convert column index 2 to datetime
+        data[2] = pd.to_datetime(data[2])
+
+        # Step 2: Sort the DataFrame by the values in column index 2
+        sorted_df = data.sort_values(by=2)
+
+        # Step 3: Reset the index to reflect the new order
+        sorted_df.reset_index(drop=True, inplace=True)
+
+        if len(sorted_df) >0 : print('15M DF query OK!')
+
+        return sorted_df
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
@@ -62,7 +73,7 @@ class ConsLevels():
             # Fetch all rows
             rows = cursor.fetchall()
             data =  pd.DataFrame(rows)
-            print(data)
+            if len(data) > 0: print('Levels DF query OK!')
 
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
@@ -108,9 +119,7 @@ spell.get_cons_levels('SPELLUSDT')
 
 
 if __name__ == '__main__':
-#    get_cons_levels('BTCUSDT')
     ex = ConsLevels()
     ex.get_cons_levels('BTCUSDT')
-    # print(ex)
-    print(ex.cons_lev2)
+    # print(ex.cons_lev2)
     pass

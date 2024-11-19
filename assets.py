@@ -1,8 +1,4 @@
-import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
-import yfinance as yf
-import time
 import asyncio
 
 from db_connect import get_data,\
@@ -176,9 +172,3 @@ def update(frame):
     axs[2][2].set_title('PENDLE')
     axs[2][3].set_title('SPELL')
 
-# Create the animation
-anim = FuncAnimation(fig, update, init_func=init, frames=np.arange(0, 100), interval=300000)  # 300000 ms = 5 minutes
-
-# Show the plot
-plt.tight_layout()
-plt.show()
