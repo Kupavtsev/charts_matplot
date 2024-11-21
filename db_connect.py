@@ -9,7 +9,7 @@ dotenv.load_dotenv()
 
 assets = {'ACHUSDT':1, 'BTCUSDT':4, 'ARKMUSDT':15, 'LPTUSDT':3,'STORJUSDT':6,'WLDUSDT':7, 'AMBUSDT':12, 'KNCUSDT':9, 'LEVERUSDT':10, 'MKRUSDT':8, 'PENDLEUSDT':14, 'SPELLUSDT':13}
 
-async def get_data(asset):
+async def get_data(asset, days :int):
     
     conn = await asyncpg.connect(
         database=os.getenv('database'),
@@ -21,7 +21,7 @@ async def get_data(asset):
 
     try:
         query = f"SELECT id, session_date, start_of_candle, price_open, price_high, price_low, price_close, volume, symbol_id FROM public.get_data_five_minutes\
-                WHERE symbol_id={assets[asset]} AND session_date = CURRENT_DATE;"
+                WHERE symbol_id={assets[asset]} AND session_date = CURRENT_DATE - {days};"
 
         rows = await conn.fetch(query)
         data = pd.DataFrame(rows)
@@ -54,7 +54,7 @@ class ConsLevels():
     cons_lev3 = None
     cons_lev4 = None
 
-    def get_cons_levels(self, asset):
+    def get_cons_levels(self, asset :str, days :int = 0):
         try:
             conn = psycopg2.connect(
                 database=os.getenv('database'),
@@ -67,7 +67,7 @@ class ConsLevels():
             cursor.execute(
                 # "SELECT id, session_date, start_of_candle, price_open, price_high, price_low, price_close, volume, ma7, ma14, ma28, symbol_id FROM public.get_data_five_minutes;"
                 f"SELECT id, symbol, session, cons_ysd_body_levels, cons_ysd_body_levels_neg, cons_ysd_body_levels_tr100, cons_ysd_body_levels_tr100_neg, series_neg, series_pos\
-                FROM public.ysd_body_levels WHERE symbol='{asset}' AND session = CURRENT_DATE;"
+                FROM public.ysd_body_levels WHERE symbol='{asset}' AND session = CURRENT_DATE - {days};"
                 )
             
             # Fetch all rows
@@ -89,33 +89,36 @@ class ConsLevels():
         self.cons_lev4 = data.iloc[0, 6]
 
 
+# Change to 0 for today!
+days = 0
+
 btc = ConsLevels()
-btc.get_cons_levels('BTCUSDT')
+btc.get_cons_levels('BTCUSDT', days)
 arkm = ConsLevels()
-arkm.get_cons_levels('ARKMUSDT')
+arkm.get_cons_levels('ARKMUSDT', days)
 ach = ConsLevels()
-ach.get_cons_levels('ACHUSDT')
+ach.get_cons_levels('ACHUSDT', days)
 lpt = ConsLevels()
-lpt.get_cons_levels('LPTUSDT')
+lpt.get_cons_levels('LPTUSDT', days)
 
 
 storj = ConsLevels()
-storj.get_cons_levels('STORJUSDT')
+storj.get_cons_levels('STORJUSDT', days)
 wld = ConsLevels()
-wld.get_cons_levels('WLDUSDT')
+wld.get_cons_levels('WLDUSDT', days)
 amb = ConsLevels()
-amb.get_cons_levels('AMBUSDT')
+amb.get_cons_levels('AMBUSDT', days)
 knc = ConsLevels()
-knc.get_cons_levels('KNCUSDT')
+knc.get_cons_levels('KNCUSDT', days)
 
 lever = ConsLevels()
-lever.get_cons_levels('LEVERUSDT')
+lever.get_cons_levels('LEVERUSDT', days)
 mkr = ConsLevels()
-mkr.get_cons_levels('MKRUSDT')
+mkr.get_cons_levels('MKRUSDT', days)
 pendle = ConsLevels()
-pendle.get_cons_levels('PENDLEUSDT')
+pendle.get_cons_levels('PENDLEUSDT', days)
 spell = ConsLevels()
-spell.get_cons_levels('SPELLUSDT')
+spell.get_cons_levels('SPELLUSDT', days)
 
 
 if __name__ == '__main__':
