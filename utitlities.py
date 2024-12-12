@@ -120,3 +120,32 @@ class Last_mid_ticks_tr100():
         for obj in mp2h_sessions:
             if type(obj.bottom_tail_mid_tr100) == float and obj.bottom_tail_mid_tr100 > 0:
                 return obj.bottom_tail_mid_tr100
+            
+
+
+def days_until_date(target_date):
+        """
+        Calculate the number of days from the current date to a specific date.
+
+        Args:
+            target_date (str): The target date in the format 'YYYY-MM-DD'.
+
+        Returns:
+            int: The number of days from the current date to the target date.
+        """
+        # Parse the target date
+        target_date = datetime.strptime(target_date, '%Y-%m-%d')
+
+        # Get the current date
+        current_date = datetime.now()
+
+        # Set the time component to midnight for both dates
+        target_date = target_date.replace(hour=0, minute=0, second=0)
+        current_date = current_date.replace(hour=0, minute=0, second=0)
+
+        # Calculate the difference between the two dates
+        date_diff = current_date - target_date
+
+
+        # Return the number of days
+        return abs(date_diff.days)

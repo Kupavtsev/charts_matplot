@@ -89,7 +89,12 @@ class ConsLevels():
         self.cons_lev4 = data.iloc[0, 6]
 
 
-# Change to 0 for today!
+'''
+Change to 0 for today!
+assets.py
+    47: days = 0
+This is LEVELS!
+'''
 days = 0
 
 btc = ConsLevels()

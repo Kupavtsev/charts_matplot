@@ -1,2 +1,7 @@
+links:
+https://pythonprogramming.net/graphing-ohlc-candlestick-in-tkinter/
+
 - app2 series of levels up/down
 - series of levels of stages 6h/9d
+
+- % at right part of a chart

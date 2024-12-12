@@ -1,8 +1,13 @@
+from datetime import date, timedelta
 import matplotlib.pyplot as plt
 import asyncio
 
 from db_connect import get_data,\
                        btc, arkm, ach, lpt, storj, wld, amb, knc, lever, mkr, pendle, spell
+
+'''
+setup day for levels and for price
+'''
 
 
 # Cons Levels
@@ -44,8 +49,18 @@ def init():
 
 # Update function for animation
 def update(frame):
-    days = 0
-    # Fetch data
+    '''
+    db_connect.py
+        97: days = 0
+    This is Price Action
+    '''
+    days = 1
+    price_action_date = date.today() - timedelta(days=days)
+    levels_date = date.today() - timedelta(days=1)
+    price_action_date_str = 'BTC p/l' + price_action_date.strftime('%Y-%m-%d') + ' / ' + levels_date.strftime('%Y-%m-%d')
+    print(price_action_date_str)
+    
+    # Fetch price data
     data1 = asyncio.run(get_data('BTCUSDT', days))
     data2 = asyncio.run(get_data('ARKMUSDT', days))
     data3 = asyncio.run(get_data('ACHUSDT', days))
@@ -79,7 +94,7 @@ def update(frame):
     axs[2][3].cla()
 
     # Plot for BTC
-    axs[0][0].plot(data1.index, data1[6], label='BTC', color='blue')
+    axs[0][0].plot(data1.index, data1[6], label=price_action_date_str, color='blue')
     axs[0][0].axhline(y=cons_levels['BTCUSDT'][0], color='red', linestyle='--', label='Level 1')
     axs[0][0].axhline(y=cons_levels['BTCUSDT'][1], color='green', linestyle='--', label='Level 2')
     axs[0][0].axhline(y=cons_levels['BTCUSDT'][2], color='red', linestyle='--', label='Level 3')
@@ -158,7 +173,7 @@ def update(frame):
     axs[2][3].axhline(y=cons_levels['SPELLUSDT'][3], color='green', linestyle='--', label='Level 4')
 
     # Set titles
-    axs[0][0].set_title('BTC')
+    axs[0][0].set_title(price_action_date_str)
     axs[0][1].set_title('ARKM')
     axs[0][2].set_title('ACH')
     axs[0][3].set_title('LPT')

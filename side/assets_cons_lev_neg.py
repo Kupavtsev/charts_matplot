@@ -1,3 +1,4 @@
+from datetime import date, timedelta
 import matplotlib.pyplot as plt
 import asyncio
 
@@ -46,7 +47,9 @@ def init2():
 # Update function for animation
 def update2(frame):
     # check with db_connect DAYS (line = 93)
-    days = 2
+    days = 7
+    price_action_date = date.today() - timedelta(days=days)
+    print(price_action_date)
     # Fetch data
     data1 = asyncio.run(get_data('BTCUSDT', days))
     data2 = asyncio.run(get_data('ARKMUSDT', days))
