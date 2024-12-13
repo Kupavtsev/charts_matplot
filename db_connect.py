@@ -89,41 +89,21 @@ class ConsLevels():
         self.cons_lev4 = data.iloc[0, 6]
 
 
-'''
-Change to 0 for today!
-assets.py
-    47: days = 0
-This is LEVELS!
-'''
-days = 0
-
 btc = ConsLevels()
-btc.get_cons_levels('BTCUSDT', days)
 arkm = ConsLevels()
-arkm.get_cons_levels('ARKMUSDT', days)
 ach = ConsLevels()
-ach.get_cons_levels('ACHUSDT', days)
 lpt = ConsLevels()
-lpt.get_cons_levels('LPTUSDT', days)
 
 
 storj = ConsLevels()
-storj.get_cons_levels('STORJUSDT', days)
 wld = ConsLevels()
-wld.get_cons_levels('WLDUSDT', days)
 amb = ConsLevels()
-amb.get_cons_levels('AMBUSDT', days)
 knc = ConsLevels()
-knc.get_cons_levels('KNCUSDT', days)
 
 lever = ConsLevels()
-lever.get_cons_levels('LEVERUSDT', days)
 mkr = ConsLevels()
-mkr.get_cons_levels('MKRUSDT', days)
 pendle = ConsLevels()
-pendle.get_cons_levels('PENDLEUSDT', days)
 spell = ConsLevels()
-spell.get_cons_levels('SPELLUSDT', days)
 
 
 if __name__ == '__main__':

@@ -10,6 +10,24 @@ setup day for levels and for price
 '''
 
 
+days = 0
+
+# get cons levels
+btc.get_cons_levels('BTCUSDT', days)
+arkm.get_cons_levels('ARKMUSDT', days)
+ach.get_cons_levels('ACHUSDT', days)
+lpt.get_cons_levels('LPTUSDT', days)
+
+storj.get_cons_levels('STORJUSDT', days)
+wld.get_cons_levels('WLDUSDT', days)
+amb.get_cons_levels('AMBUSDT', days)
+knc.get_cons_levels('KNCUSDT', days)
+
+lever.get_cons_levels('LEVERUSDT', days)
+mkr.get_cons_levels('MKRUSDT', days)
+pendle.get_cons_levels('PENDLEUSDT', days)
+spell.get_cons_levels('SPELLUSDT', days)
+
 # Cons Levels
 cons_levels = {
     'BTCUSDT': [btc.cons_lev1, btc.cons_lev2, btc.cons_lev3, btc.cons_lev4],
@@ -49,12 +67,7 @@ def init():
 
 # Update function for animation
 def update(frame):
-    '''
-    db_connect.py
-        97: days = 0
-    This is Price Action
-    '''
-    days = 1
+    
     price_action_date = date.today() - timedelta(days=days)
     levels_date = date.today() - timedelta(days=1)
     price_action_date_str = 'BTC p/l' + price_action_date.strftime('%Y-%m-%d') + ' / ' + levels_date.strftime('%Y-%m-%d')
