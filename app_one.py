@@ -16,6 +16,8 @@ asset_id :int = 14
 
 '''
 get this dates from txt or py file
+just read a string number with date
+each date on a new string
 which will be ganerated in statistics charts_django
 '''
 # '%Y-%m-%d'

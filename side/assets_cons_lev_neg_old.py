@@ -6,22 +6,6 @@ from db_connect import get_data,\
                        btc, arkm, ach, lpt, storj, wld, amb, knc, lever, mkr, pendle, spell
 
 # from assets import fig, axs
-days = 0
-
-btc.get_cons_levels('BTCUSDT', days)
-arkm.get_cons_levels('ARKMUSDT', days)
-ach.get_cons_levels('ACHUSDT', days)
-lpt.get_cons_levels('LPTUSDT', days)
-
-storj.get_cons_levels('STORJUSDT', days)
-wld.get_cons_levels('WLDUSDT', days)
-amb.get_cons_levels('AMBUSDT', days)
-knc.get_cons_levels('KNCUSDT', days)
-
-lever.get_cons_levels('LEVERUSDT', days)
-mkr.get_cons_levels('MKRUSDT', days)
-pendle.get_cons_levels('PENDLEUSDT', days)
-spell.get_cons_levels('SPELLUSDT', days)
 
 # Cons Levels
 cons_levels = {
@@ -63,12 +47,12 @@ def init2():
 # Update function for animation
 def update2(frame):
     # check with db_connect DAYS (line = 93)
-    
+    days = 0
     price_action_date = date.today() - timedelta(days=days)
     print(price_action_date)
     # Fetch data
     data1 = asyncio.run(get_data('BTCUSDT', days))
-    data2 = asyncio.run(get_data('ARKMUSDT', days ))
+    data2 = asyncio.run(get_data('ARKMUSDT', days))
     data3 = asyncio.run(get_data('ACHUSDT', days))
     data4 = asyncio.run(get_data('LPTUSDT', days))
 
