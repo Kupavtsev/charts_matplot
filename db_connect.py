@@ -89,6 +89,8 @@ class ConsLevels():
         self.cons_lev4 = data.iloc[0, 6]
 
 
+# Instances of assets ConsLevels Class
+
 btc = ConsLevels()
 arkm = ConsLevels()
 ach = ConsLevels()

@@ -5,8 +5,9 @@ from matplotlib.widgets import Button
 
 import numpy as np
 
-# from side.assets_cons_lev_pos import fig, init2, update2
-from side.assets_cons_lev_neg import fig, init2, update2
+# CHANGE LEVELS TO WATCH
+from side.assets_cons_lev_pos import fig, init2, update2
+# from side.assets_cons_lev_neg import fig, init2, update2
 
 '''
 Choise to show posi or neg ysd levels only.
@@ -17,7 +18,7 @@ Choise to show posi or neg ysd levels only.
 # button = Button(button_ax, 'Test')
 
 # Create the animation
-anim = FuncAnimation(fig, update2, init_func=init2, frames=np.arange(0, 100), interval=300000)  # 300000 ms = 5 minutes
+anim = FuncAnimation(fig, update2, init_func=init2, frames=np.arange(0, 100), interval=30000)  # 300000 ms = 5 minutes
 
 # def test(event):
     # print('Test!')
