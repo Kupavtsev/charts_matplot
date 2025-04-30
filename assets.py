@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import asyncio
 
 from db_connect import get_data,\
-                       btc, arkm, ach, lpt, storj, wld, amb, knc, lever, mkr, pendle, spell
+                       btc, arkm, ach, lpt, storj, wld, knc, lever, mkr, pendle, spell
 
 '''
 setup day for levels and for price
@@ -20,7 +20,7 @@ lpt.get_cons_levels('LPTUSDT', days)
 
 storj.get_cons_levels('STORJUSDT', days)
 wld.get_cons_levels('WLDUSDT', days)
-amb.get_cons_levels('AMBUSDT', days)
+# amb.get_cons_levels('AMBUSDT', days)
 knc.get_cons_levels('KNCUSDT', days)
 
 lever.get_cons_levels('LEVERUSDT', days)
@@ -36,7 +36,7 @@ cons_levels = {
     'LPTUSDT': [lpt.cons_lev1, lpt.cons_lev2, lpt.cons_lev3, lpt.cons_lev4],
     'STORJUSDT': [storj.cons_lev1, storj.cons_lev2, storj.cons_lev3, storj.cons_lev4],
     'WLDUSDT': [wld.cons_lev1, wld.cons_lev2, wld.cons_lev3, wld.cons_lev4],
-    'AMBUSDT': [amb.cons_lev1, amb.cons_lev2, amb.cons_lev3, amb.cons_lev4],
+    # 'AMBUSDT': [amb.cons_lev1, amb.cons_lev2, amb.cons_lev3, amb.cons_lev4],
     'KNCUSDT': [knc.cons_lev1, knc.cons_lev2, knc.cons_lev3, knc.cons_lev4],
     'LEVERUSDT': [lever.cons_lev1, lever.cons_lev2, lever.cons_lev3, lever.cons_lev4],
     'MKRUSDT': [mkr.cons_lev1, mkr.cons_lev2, mkr.cons_lev3, mkr.cons_lev4],
@@ -56,7 +56,7 @@ def init():
     
     axs[1][0].set_title('STORJ')
     axs[1][1].set_title('WLD')
-    axs[1][2].set_title('AMB')
+    # axs[1][2].set_title('AMB')
     axs[1][3].set_title('KNC')
     
     axs[2][0].set_title('LEVER')
@@ -81,7 +81,7 @@ def update(frame):
 
     data5 = asyncio.run(get_data('STORJUSDT', days))
     data6 = asyncio.run(get_data('WLDUSDT', days))
-    data7 = asyncio.run(get_data('AMBUSDT', days))
+    # data7 = asyncio.run(get_data('AMBUSDT', days))
     data8 = asyncio.run(get_data('KNCUSDT', days))
 
     data9 = asyncio.run(get_data('LEVERUSDT', days))
@@ -148,11 +148,11 @@ def update(frame):
     axs[1][1].axhline(y=cons_levels['WLDUSDT'][2], color='red', linestyle='--', label='Level 3')
     axs[1][1].axhline(y=cons_levels['WLDUSDT'][3], color='green', linestyle='--', label='Level 4')
    
-    axs[1][2].plot(data7.index, data7[6], label='lpt', color='green')
-    axs[1][2].axhline(y=cons_levels['AMBUSDT'][0], color='red', linestyle='--', label='Level 1')
-    axs[1][2].axhline(y=cons_levels['AMBUSDT'][1], color='green', linestyle='--', label='Level 2')
-    axs[1][2].axhline(y=cons_levels['AMBUSDT'][2], color='red', linestyle='--', label='Level 3')
-    axs[1][2].axhline(y=cons_levels['AMBUSDT'][3], color='green', linestyle='--', label='Level 4')
+    # axs[1][2].plot(data7.index, data7[6], label='lpt', color='green')
+    # axs[1][2].axhline(y=cons_levels['AMBUSDT'][0], color='red', linestyle='--', label='Level 1')
+    # axs[1][2].axhline(y=cons_levels['AMBUSDT'][1], color='green', linestyle='--', label='Level 2')
+    # axs[1][2].axhline(y=cons_levels['AMBUSDT'][2], color='red', linestyle='--', label='Level 3')
+    # axs[1][2].axhline(y=cons_levels['AMBUSDT'][3], color='green', linestyle='--', label='Level 4')
     
     axs[1][3].plot(data8.index, data8[6], label='lpt', color='green')
     axs[1][3].axhline(y=cons_levels['KNCUSDT'][0], color='red', linestyle='--', label='Level 1')
@@ -193,7 +193,7 @@ def update(frame):
     
     axs[1][0].set_title('STORJ')
     axs[1][1].set_title('WLD')
-    axs[1][2].set_title('AMB')
+    # axs[1][2].set_title('AMB')
     axs[1][3].set_title('KNC')
     
     axs[2][0].set_title('LEVER')

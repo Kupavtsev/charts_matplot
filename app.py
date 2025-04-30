@@ -12,7 +12,7 @@ from assets import fig, update, init
 # button = Button(button_ax, 'Test')
 
 # Create the animation
-anim = FuncAnimation(fig, update, init_func=init, frames=np.arange(0, 100), interval=300000)  # 300000 ms = 5 minutes
+anim = FuncAnimation(fig, update, init_func=init, frames=np.arange(0, 100), interval=60000)  # 300000 ms = 5 minutes
 
 # def test(event):
     # print('Test!')

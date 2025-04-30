@@ -6,8 +6,8 @@ from matplotlib.widgets import Button
 import numpy as np
 
 # CHANGE LEVELS TO WATCH
-from side.assets_cons_lev_pos import fig, init2, update2
-# from side.assets_cons_lev_neg import fig, init2, update2
+# from side.assets_cons_lev_pos import fig, init2, update2
+from side.assets_cons_lev_neg import fig, init2, update2
 
 '''
 Choise to show posi or neg ysd levels only.
