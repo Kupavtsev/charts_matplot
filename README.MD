@@ -11,3 +11,6 @@ app2.py
 
 app_one.py
     for one asset and different periods for price and levels
+
+app_chart.py
+    One price scale for a period

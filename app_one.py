@@ -4,7 +4,7 @@ import numpy as np
 import asyncio
 
 from db_connect import ConsLevels, get_data,\
-                       btc, arkm, ach, lpt, storj, wld, amb, knc, lever, mkr, pendle, spell
+                       btc, arkm, ach, lpt, storj, wld, knc, lever, mkr, pendle, spell
 from utitlities import days_until_date
 
 fig, axs = plt.subplots(3, 4, figsize=(14, 5))
@@ -22,18 +22,18 @@ which will be ganerated in statistics charts_django
 '''
 # '%Y-%m-%d'
 date_price = {
-    0  : days_until_date('2024-12-09'),
-    1 : days_until_date('2024-12-06'),
-    2 : days_until_date('2024-12-04'),
-    3 : days_until_date('2024-11-08'),
-    10 : days_until_date('2024-11-07'),
-    11 : days_until_date('2024-11-06'),
-    12 : days_until_date('2024-10-29'),
-    13 : days_until_date('2024-10-24'),
-    20 : days_until_date('2024-10-19'),
-    21 : days_until_date('2024-10-18'),
-    22 : days_until_date('2024-10-14'),
-    23 : days_until_date('2024-09-20'),
+    0  : days_until_date('2025-05-01'),
+    1 : days_until_date('2025-04-30'),
+    2 : days_until_date('2025-04-29'),
+    3 : days_until_date('2025-04-28'),
+    10 : days_until_date('2025-04-27'),
+    11 : days_until_date('2025-04-26'),
+    12 : days_until_date('2025-04-25'),
+    13 : days_until_date('2025-04-25'),
+    20 : days_until_date('2025-04-25'),
+    21 : days_until_date('2025-04-25'),
+    22 : days_until_date('2025-04-25'),
+    23 : days_until_date('2025-04-25'),
 }
 
 
@@ -101,8 +101,8 @@ data12 = asyncio.run(get_data(asset, date_price[23]))
 
 # Plot for BTC
 axs[0][0].plot(data1.index, data1[6], label=price_action_date_str0, color='blue')
-# axs[0][0].axhline(y=cons_levels['BTCUSDT'][0], color='red', linestyle='--', label='Level 1')
-# axs[0][0].axhline(y=cons_levels['BTCUSDT'][1], color='green', linestyle='--', label='Level 2')
+axs[0][0].axhline(y=asset0.cons_lev1, color='red', linestyle='--', label='Level 1')
+axs[0][0].axhline(y=asset0.cons_lev2, color='green', linestyle='--', label='Level 2')
 axs[0][0].axhline(y=asset0.cons_lev3, color='red', linestyle='--', label='Level 3')
 axs[0][0].axhline(y=asset0.cons_lev4, color='green', linestyle='--', label='Level 4')
 # axs[0].legend()
@@ -111,41 +111,41 @@ axs[0][0].axhline(y=asset0.cons_lev4, color='green', linestyle='--', label='Leve
 axs[0][1].plot(data2.index, data2[6], label=price_action_date_str01, color='orange')
 axs[0][1].axhline(y=asset01.cons_lev1, color='red', linestyle='--', label='Level 1')
 axs[0][1].axhline(y=asset01.cons_lev2, color='green', linestyle='--', label='Level 2')
-# axs[0][1].axhline(y=cons_levels['ARKMUSDT'][2], color='red', linestyle='--', label='Level 3')
-# axs[0][1].axhline(y=cons_levels['ARKMUSDT'][3], color='green', linestyle='--', label='Level 4')
+axs[0][1].axhline(y=asset01.cons_lev3, color='red', linestyle='--', label='Level 3')
+axs[0][1].axhline(y=asset01.cons_lev4, color='green', linestyle='--', label='Level 4')
 # axs[1].legend()
 
 axs[0][2].plot(data3.index, data3[6], label=price_action_date_str02, color='orange')
 axs[0][2].axhline(y=asset02.cons_lev1, color='red', linestyle='--', label='Level 1')
 axs[0][2].axhline(y=asset02.cons_lev2, color='green', linestyle='--', label='Level 2')
-# axs[0][2].axhline(y=asset02.cons_levels3, color='red', linestyle='--', label='Level 3')
-# axs[0][2].axhline(y=asset02.cons_levels4, color='green', linestyle='--', label='Level 4')
+axs[0][2].axhline(y=asset02.cons_lev3, color='red', linestyle='--', label='Level 3')
+axs[0][2].axhline(y=asset02.cons_lev4, color='green', linestyle='--', label='Level 4')
 
 axs[0][3].plot(data4.index, data4[6], label=price_action_date_str03, color='orange')
 axs[0][3].axhline(y=asset03.cons_lev1, color='red', linestyle='--', label='Level 1')
 axs[0][3].axhline(y=asset03.cons_lev2, color='green', linestyle='--', label='Level 2')
-# axs[0][3].axhline(y=asset03.cons_levels3, color='red', linestyle='--', label='Level 3')
-# axs[0][3].axhline(y=asset03.cons_levels4, color='green', linestyle='--', label='Level 4')
+axs[0][3].axhline(y=asset03.cons_lev3, color='red', linestyle='--', label='Level 3')
+axs[0][3].axhline(y=asset03.cons_lev4, color='green', linestyle='--', label='Level 4')
 
 
 
 axs[1][0].plot(data5.index, data5[6], label=price_action_date_str10, color='orange')
 axs[1][0].axhline(y=asset10.cons_lev1, color='red', linestyle='--', label='Level 1')
 axs[1][0].axhline(y=asset10.cons_lev2, color='green', linestyle='--', label='Level 2')
-# axs[1][0].axhline(y=asset10.cons_levels3, color='red', linestyle='--', label='Level 3')
-# axs[1][0].axhline(y=asset10.cons_levels4, color='green', linestyle='--', label='Level 4')
+axs[1][0].axhline(y=asset10.cons_lev3, color='red', linestyle='--', label='Level 3')
+axs[1][0].axhline(y=asset10.cons_lev4, color='green', linestyle='--', label='Level 4')
 
 axs[1][1].plot(data6.index, data6[6], label=price_action_date_str11, color='orange')
 axs[1][1].axhline(y=asset11.cons_lev1, color='red', linestyle='--', label='Level 1')
 axs[1][1].axhline(y=asset11.cons_lev2, color='green', linestyle='--', label='Level 2')
-# axs[1][1].axhline(y=asset11.cons_levels3, color='red', linestyle='--', label='Level 3')
-# axs[1][1].axhline(y=asset11.cons_levels4, color='green', linestyle='--', label='Level 4')
+axs[1][1].axhline(y=asset11.cons_lev3, color='red', linestyle='--', label='Level 3')
+axs[1][1].axhline(y=asset11.cons_lev4, color='green', linestyle='--', label='Level 4')
 
 axs[1][2].plot(data7.index, data7[6], label=price_action_date_str12, color='green')
 axs[1][2].axhline(y=asset12.cons_lev1, color='red', linestyle='--', label='Level 1')
 axs[1][2].axhline(y=asset12.cons_lev2, color='green', linestyle='--', label='Level 2')
-# axs[1][2].axhline(y=asset12.cons_levels3, color='red', linestyle='--', label='Level 3')
-# axs[1][2].axhline(y=asset12.cons_levels4, color='green', linestyle='--', label='Level 4')
+axs[1][2].axhline(y=asset12.cons_lev3, color='red', linestyle='--', label='Level 3')
+axs[1][2].axhline(y=asset12.cons_lev4, color='green', linestyle='--', label='Level 4')
 
 axs[1][3].plot(data8.index, data8[6], label=price_action_date_str13, color='green')
 axs[1][3].axhline(y=asset13.cons_lev1, color='red', linestyle='--', label='Level 1')

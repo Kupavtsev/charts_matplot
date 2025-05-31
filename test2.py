@@ -2,7 +2,7 @@ import pandas as pd
 import mplfinance as mpf
 from io import StringIO
 
-# Raw data as provided, now including volume
+# Raw data as provided, including volume
 data = """
 2024-10-14;4.0628;4.4696;3.9886;4.3544;14435426.0
 2024-10-15;4.3549;4.455;4.0502;4.2343;14644822.0
@@ -21,17 +21,25 @@ data = """
 2024-10-28;4.507;4.6539;4.3116;4.6052;10374452.0
 """
 
-# Parse the data into a pandas DataFrame
-# Columns are date; open; high; low; close; volume
+# Load the data into dataframe
 df = pd.read_csv(StringIO(data), sep=';', header=None, names=['Date', 'Open', 'High', 'Low', 'Close', 'Volume'])
-
-# Convert Date column to datetime and set as index
 df['Date'] = pd.to_datetime(df['Date'])
 df.set_index('Date', inplace=True)
-
-# Optional: sort index just in case
 df.sort_index(inplace=True)
 
-# Plot candlestick chart with volume
-mpf.plot(df, type='candle', style='charles', title='Candlestick Chart with Volume', ylabel='Price', volume=True)
+# Define the price level to plot
+level = 4.5
 
+# Create a horizontal line across the full index range at price level using addplot
+ap0 = mpf.make_addplot([level]*len(df), color='purple', linestyle='--', width=1.5)
+
+# Plot candlestick with volume and the horizontal line
+mpf.plot(
+    df,
+    type='candle',
+    style='charles',
+    title='Candlestick Chart with Volume and Price Level',
+    ylabel='Price',
+    volume=True,
+    addplot=ap0
+)
